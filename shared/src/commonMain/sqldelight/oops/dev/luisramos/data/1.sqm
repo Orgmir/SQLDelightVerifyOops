@@ -1,0 +1,20 @@
+CREATE TEMPORARY TABLE user_tmp(
+    id INTEGER PRIMARY KEY,
+    phoneNumber TEXT
+);
+
+INSERT INTO user_tmp
+    SELECT id,phoneNumber
+    FROM user;
+
+DROP TABLE user;
+
+CREATE TABLE user(
+    id INTEGER PRIMARY KEY,
+    phoneNumber TEXT
+);
+
+INSERT INTO user
+    SELECT id,phoneNumber FROM user_tmp;
+
+DROP TABLE user_tmp;
